@@ -3,13 +3,14 @@
 Salut à toi jeune entrepreneur ! Alors si aujourd'hui on se permet de te contacter, c'est pour une raison très simple. Michel, notre dev, a commencé un projet super important et est parti en nous laissant en plan 😭. Nous avons besoin de toi pour le terminer !
 
 Je t'explique, c'est une application de Todolist découpée en 2 parties :
+
 - Un front fait en HTML/CSS(bulma)/JS
 - Une API avec Express et Sequelize
 
 D'après les infos qu'on a, il a quand même eu le temps d'avancer sur certaines choses :
+
 - front : le HTML/CSS est fait, le JS est bien avancé mais il manque les appels à l'API
 - back : la base Express est là, les modèles ont été créés mais il manque les routes.
-
 
 Mais bon, professionnel comme il est, notre dev avait laissé une doc ainsi qu'une roadmap, je te propose de la suivre.
 
@@ -17,15 +18,18 @@ Mais bon, professionnel comme il est, notre dev avait laissé une doc ainsi qu'u
 
 ### Organisation du dépot
 
-Pour des raisons de practicité pour ce parcours, le dépot contient les **2 projets** nécessaires : 
+Pour des raisons de practicité pour ce parcours, le dépot contient les **2 projets** nécessaires :
+
 - un dossier `front` qui contient le HTML/CSS/JS front. Il faut ouvrir le fichier `index.html` de ce dossier dans un navigateur.
-- un dossier `back` qui contient l'API qui fournira au front les données nécessaires. Voir la section suivante pour démarrer l'API. Seul le dossier `back` utilise `npm`. 
+- un dossier `back` qui contient l'API qui fournira au front les données nécessaires. Voir la section suivante pour démarrer l'API. Seul le dossier `back` utilise `npm`.
 
 ### API
 
 #### Initialisation de la base
 
-On va commencer par créer un utilisateur et une nouvelle base de données : https://kourou.oclock.io/ressources/objectifs/creer-une-nouvelle-base-de-donnee-sur-postgresql/
+On va commencer par créer un utilisateur et une nouvelle base de données :
+
+https://kourou.oclock.io/ressources/objectifs/creer-une-nouvelle-base-de-donnee-sur-postgresql/
 
 Dans nos exemples nous avons créé un utilisateur `otodo` qui a pour mot de passe `otodo` et une base `otodo`.
 
@@ -37,12 +41,12 @@ Pour permettre à notre backend de se connecter à la base de données, nous avo
 
 #### Démarrer l'API
 
-Pour démarrer l'API : 
+Pour démarrer l'API :
 
 - Se déplacer dans le dossier back :
   - `cd back`
 
-- Installer les dépendances : 
+- Installer les dépendances :
   - `npm install`
 
 - Puis démarrer le serveur Node.js
@@ -54,18 +58,18 @@ Ouvrir le fichier HTML dans un navigateur ou bien lancer un `Live-Server` à l'a
 
 #### Liste des routes à créer
 
-Ces routes seront à implémenter au fur et a mesure des étapes du projet.
+Ces routes seront à implémenter au fur et à mesure des étapes du projet.
 
 Voici une vision d'ensemble :
 
 | Route        | Méthode | Action | Données renvoyées   |
----------------|---------|------------------------------|-----------------
+|--------------|---------|------------------------------|-----------------
 | `/tasks`     | GET     | Récupère la liste des tâches | Liste des tâches
 | `/tasks`     | POST    | Ajoute une nouvelle tâche    | Tâche créée
 | `/tasks/:id` | PATCH   | Modifie une tâche            | Tâche modifiée
 | `/tasks/:id` | DELETE  | Supprime une tâche           | Aucune donnée renvoyée
 
-Note : pensez à retourner les code HTTP appropriés
+Note : pensez à retourner les codes HTTP appropriés
 
 ## Roadmap
 
@@ -77,7 +81,7 @@ On va commencer par la liste des tâches. Pour cela, on va d'abord terminer la r
 
 Dans le code JS front, une fonction `fetchAndInsertTasksFromApi()` a été commencée (voir `front/assets/js/task.js`). Il faudrait la terminer ;).
 
-D'abord, supprimer les données d'exemple ajoutées dans la fonction `init()` (voir `front/assets/js/app.js`) et completer la fonction `fetchAndInsertTasksFromApi()`.
+D'abord, supprimer les données d'exemple ajoutées dans la fonction `init()` (voir `front/assets/js/app.js`) et compléter la fonction `fetchAndInsertTasksFromApi()`.
 
 ### Étape 3
 

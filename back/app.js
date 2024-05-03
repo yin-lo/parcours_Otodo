@@ -19,7 +19,7 @@ app.use(express.json());
 
 // On demande à Express d'extraire les données des requêtes POST formatées en JSON
 const mutipartParser = multer();
-app.use(mutipartParser.none()); // On utlise .none() pour dire qu'on attend pas de fichier, uniquement des inputs "classiques" !
+app.use(mutipartParser.none()); // On utlise .none() pour dire qu'on n'attend pas de fichier, uniquement des inputs "classiques" !
 
 // On plug le router
 app.use(router);
@@ -27,5 +27,5 @@ app.use(router);
 // On lance l'application
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`API demarrée sur http://localhost:${port}`);
+  console.log(`API démarrée sur http://localhost:${port}`);
 });
