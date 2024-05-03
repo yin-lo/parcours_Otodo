@@ -11,13 +11,6 @@ const taskController = {
   store: async function(req,res) {
     try {
       let { name } = req.body;
-  
-      // if(!name || typeof name !== 'string') {
-      //   return res
-      //   .status(400)
-      //   .json({error: 'Le paramètre name est invalide'});
-      // }
-      // console.log(name);
 
       const newTask = await Task.create({ name });
 
@@ -25,8 +18,20 @@ const taskController = {
 
     } catch (error) {
       console.log(error);
-    }
-    
+    } 
+  },
+
+  update: async function(req,res) {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    const taskToUpdate = await Task.findByPk(id);
+
+    const updatedTask = await taskToUpdate.update({
+      name: name,
+    });
+
+    res.json(updatedTask);
   }
 };
 

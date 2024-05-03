@@ -2,7 +2,7 @@ const taskManager = {
   apiEndpoint: 'http://localhost:3000',
 
   /**
-   * Récupére la liste des tâches depuis l'API.
+   * Récupère la liste des tâches depuis l'API.
    */
   fetchAndInsertTasksFromApi: async function (event) {
     // Récupère la liste des tâches à l'aide de la fonction fetch()
@@ -13,8 +13,6 @@ const taskManager = {
       if (!response.ok) {
         throw json;
       }
-      console.log(json);
-
       // Boucle sur la liste des tâches
       json.forEach((task) => {
         // pour chaque tâche appeler la fonction insertTaskInHtml()
@@ -73,7 +71,7 @@ const taskManager = {
 
     // Récupérer les données du formulaire
     const taskFormData = new FormData(event.currentTarget);
-    console.log(taskFormData);
+
     // Envoyer les données à l'API
     const addTask = await fetch(`${taskManager.apiEndpoint}/tasks`, {
       method: 'POST',
@@ -109,7 +107,7 @@ const taskManager = {
    * @param {Event} event
    */
   handleEditButton: function (event) {
-    // On récupére l'élément HTML de la tâche à modifier
+    // On récupère l'élément HTML de la tâche à modifier
     const taskHtmlElement = event.currentTarget.closest('.task');
     // On affiche l'input de modification
     taskHtmlElement.querySelector('.task__edit-form').style.display = 'flex';
@@ -122,8 +120,8 @@ const taskManager = {
    *
    * @param {Event} event
    */
-  handleEditForm: function (event) {
-    // Bloquer l'envoie du formulaire
+  handleEditForm: async function (event, id) {
+    // Bloquer l'envoi du formulaire
     event.preventDefault();
 
     // On récupère l'élément HTML complet de la tâche à modifier
@@ -134,10 +132,21 @@ const taskManager = {
 
     // je récupère l'id de la tâche à modifier
     const taskId = taskFormData.get('id');
-
+    
+    console.log(taskFormData);
     // Envoyer les données à l'API
+    const updateTask = await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {
+      method: 'PATCH',
+      body: taskFormData,
+    });
 
+    const json = await updateTask.json();
+    if (!updateTask.ok) {
+      throw json;
+    }
     // Après confirmation de l'API modifier le nom de la tâche dans le span.task__name
+    const newTitle = taskHtmlElement.querySelector('.task__name');
+    newTitle.textContent = json.name;
 
     // On affiche l'input de modification
     taskHtmlElement.querySelector('.task__edit-form').style.display = 'none';
