@@ -8,20 +8,19 @@ const taskController = {
     res.json(tasks);
   },
 
-  store: async function(req,res) {
+  store: async function (req, res) {
     try {
       let { name } = req.body;
 
       const newTask = await Task.create({ name });
 
       res.json(newTask);
-
     } catch (error) {
-      console.log(error);
-    } 
+      console.error(error);
+    }
   },
 
-  update: async function(req,res) {
+  update: async function (req, res) {
     const { id } = req.params;
     const { name } = req.body;
 
@@ -32,7 +31,17 @@ const taskController = {
     });
 
     res.json(updatedTask);
-  }
+  },
+
+  destroy: async function (req, res) {
+    const id = Number.parseInt(req.params.id, 10);
+
+    const taskToDelete = await Task.findByPk(id);
+
+    await taskToDelete.destroy();
+
+    return res.status(204).json;
+  },
 };
 
 module.exports = taskController;

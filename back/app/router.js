@@ -12,5 +12,6 @@ router.post('/tasks', taskController.store);
 router.patch('/tasks/:id',taskController.update);
 
 // Route pour supprimer une tache
+router.delete('/tasks/:id', taskController.destroy);
 
 module.exports = router;

@@ -18,7 +18,6 @@ const taskManager = {
         // pour chaque tâche appeler la fonction insertTaskInHtml()
         taskManager.insertTaskInHtml(task);
       });
-
     } catch (error) {
       console.log(error);
       return null;
@@ -83,7 +82,7 @@ const taskManager = {
     }
     // Après confirmation de l'API insérer la tâche dans la page (il y a une fonction toute prête pour ça ;)
     // en utilisant la valeur de retour de l'API
-      taskManager.insertTaskInHtml(json);
+    taskManager.insertTaskInHtml(json);
   },
 
   /**
@@ -91,14 +90,25 @@ const taskManager = {
    *
    * @param {Event} event
    */
-  handleDeleteButton: function (event) {
+  handleDeleteButton: async function (event) {
     // On récupère l'ID de l'élément à supprimer
     const taskHtmlElement = event.currentTarget.closest('.task');
     const taskId = taskHtmlElement.dataset.id;
+    
+    console.log(taskId);
+    console.log(taskHtmlElement);
 
     // On envoie la requete de suppression à l'API
+    await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {
+      method: 'DELETE',
+    });
+
+    // if (!deleteTask.ok) {
+    //   throw deleteTask;
+    // }
 
     // On supprime l'élément dans la page HTML
+    taskHtmlElement.remove();
   },
 
   /**
@@ -120,7 +130,7 @@ const taskManager = {
    *
    * @param {Event} event
    */
-  handleEditForm: async function (event, id) {
+  handleEditForm: async function (event) {
     // Bloquer l'envoi du formulaire
     event.preventDefault();
 
@@ -132,7 +142,7 @@ const taskManager = {
 
     // je récupère l'id de la tâche à modifier
     const taskId = taskFormData.get('id');
-    
+
     console.log(taskFormData);
     // Envoyer les données à l'API
     const updateTask = await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {

@@ -17,3 +17,8 @@ content-type: application/json
 {
   "name": "On change le nom !"
 }
+
+###
+
+DELETE http://localhost:3000/tasks/7 HTTP/1.1
+content-type: application/json
