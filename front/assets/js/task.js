@@ -90,11 +90,12 @@ const taskManager = {
    *
    * @param {Event} event
    */
+
   handleDeleteButton: async function (event) {
     // On récupère l'ID de l'élément à supprimer
     const taskHtmlElement = event.currentTarget.closest('.task');
     const taskId = taskHtmlElement.dataset.id;
-    
+
     console.log(taskId);
     console.log(taskHtmlElement);
 
@@ -102,12 +103,7 @@ const taskManager = {
     await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {
       method: 'DELETE',
     });
-
-    // if (!deleteTask.ok) {
-    //   throw deleteTask;
-    // }
-
-    // On supprime l'élément dans la page HTML
+     // On supprime l'élément dans la page HTML
     taskHtmlElement.remove();
   },
 
