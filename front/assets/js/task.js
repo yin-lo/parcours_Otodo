@@ -68,6 +68,7 @@ const taskManager = {
     // Bloquer l'envoi du formulaire
     event.preventDefault();
 
+    try{
     // Récupérer les données du formulaire
     const taskFormData = new FormData(event.currentTarget);
 
@@ -87,6 +88,10 @@ const taskManager = {
     // réinitialiser le formulaire
     const formCreateTask = event.target.closest('form');
       formCreateTask.reset();
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   },
 
   /**
@@ -96,16 +101,26 @@ const taskManager = {
    */
 
   handleDeleteButton: async function (event) {
+    try {
     // On récupère l'ID de l'élément à supprimer
     const taskHtmlElement = event.currentTarget.closest('.task');
     const taskId = taskHtmlElement.dataset.id;
 
     // On envoie la requete de suppression à l'API
-    await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {
+    const response = await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {
       method: 'DELETE',
     });
+
+    if (!response.ok) {
+      throw new Error('Suppression impossible');
+    }
      // On supprime l'élément dans la page HTML
     taskHtmlElement.remove();
+
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
   },
 
   /**
