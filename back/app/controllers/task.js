@@ -34,7 +34,7 @@ const taskController = {
   },
 
   destroy: async function (req, res) {
-    const id = Number.parseInt(req.params.id, 10);
+    const id = Number(req.params.id);
     const taskToDelete = await Task.findByPk(id);
     await taskToDelete.destroy();
     return res.status(204).json();

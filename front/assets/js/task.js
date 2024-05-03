@@ -83,6 +83,10 @@ const taskManager = {
     // Après confirmation de l'API insérer la tâche dans la page (il y a une fonction toute prête pour ça ;)
     // en utilisant la valeur de retour de l'API
     taskManager.insertTaskInHtml(json);
+
+    // réinitialiser le formulaire
+    const formCreateTask = event.target.closest('form');
+      formCreateTask.reset();
   },
 
   /**
@@ -95,9 +99,6 @@ const taskManager = {
     // On récupère l'ID de l'élément à supprimer
     const taskHtmlElement = event.currentTarget.closest('.task');
     const taskId = taskHtmlElement.dataset.id;
-
-    console.log(taskId);
-    console.log(taskHtmlElement);
 
     // On envoie la requete de suppression à l'API
     await fetch(`${taskManager.apiEndpoint}/tasks/${taskId}`, {
