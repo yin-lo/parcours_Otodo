@@ -1,7 +1,7 @@
 const app = {
     init: function () {
 
-        // // Ajout de données de test, supprimer ces 2 appels lorsque l'API est branchée
+        //* Ajout de données de test, supprimer ces 2 appels lorsque l'API est branchée
         // taskManager.insertTaskInHtml({
         //     id: 1,
         //     name: 'Créer le HTML'

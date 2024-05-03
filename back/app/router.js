@@ -6,6 +6,7 @@ const taskController = require('./controllers/task');
 router.get('/tasks', taskController.listTasks);
 
 // Route pour ajouter une tache
+router.post('/tasks', taskController.store);
 
 // Route pour modifier une tache
 

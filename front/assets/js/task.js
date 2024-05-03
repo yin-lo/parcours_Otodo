@@ -17,10 +17,10 @@ const taskManager = {
 
       // Boucle sur la liste des tâches
       json.forEach((task) => {
+        // pour chaque tâche appeler la fonction insertTaskInHtml()
         taskManager.insertTaskInHtml(task);
       });
 
-      // pour chaque tâche appeler la fonction insertTaskInHtml()
     } catch (error) {
       console.log(error);
       return null;
@@ -67,17 +67,25 @@ const taskManager = {
    *
    * @param {Event} event
    */
-  handleCreateForm: function (event) {
-    // Bloquer l'envoie du formulaire
+  handleCreateForm: async function (event) {
+    // Bloquer l'envoi du formulaire
     event.preventDefault();
 
     // Récupérer les données du formulaire
     const taskFormData = new FormData(event.currentTarget);
-
+    console.log(taskFormData);
     // Envoyer les données à l'API
-
-    // Après confirmation de l'API insérer la tâche dans la page (il y a une fonction toute prete pour ça ;)
+    const addTask = await fetch(`${taskManager.apiEndpoint}/tasks`, {
+      method: 'POST',
+      body: taskFormData,
+    });
+    const json = await addTask.json();
+    if (!addTask.ok) {
+      throw json;
+    }
+    // Après confirmation de l'API insérer la tâche dans la page (il y a une fonction toute prête pour ça ;)
     // en utilisant la valeur de retour de l'API
+      taskManager.insertTaskInHtml(json);
   },
 
   /**
